@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <section>
+
+
+    
+        <h2>Real Estate Open House Feedback Form</h2>
+        <p>We appreciate your thoughts.</p>
+
+        <hr>
+        <br>
+        <div class="container-fluid">
+          <div class="row" style="padding-left: 20px;">
+            <div class="col-xl-10 col-lg-9 col-md-8 ms-auto">
+              <div class="row pt-md-5 mt-md-3 mb-5">
+                <div class="col-xl-3 col-sm-6 p-2">
+                    {{feedbackForm.value | json}}
+                    <form [formGroup]="feedbackForm" (ngSubmit)="submitForm()" >
+                    <div class="form-group" style="padding-bottom: 25px;">
+                        <label for="firstName">First Name</label>
+                        <br>
+                        <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                        <div *ngIf="feedbackForm.get('firstName')?.errors?.['required'] && feedbackForm.get
+                        ('firstName')?.touched"
+                  class="alert alert-danger"
+                  >
+                  <!-- jab hum koi object ke key aur value ka datatype defined hai toh u will access with index signature. -->
+                  First name required
+                  </div>
+                      </div>
+                      <div class="form-group" style="padding-bottom: 25px;">
+                          <label for="lastName">Last Name</label>
+                          <br>
+                          <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                          <div *ngIf="feedbackForm.get('lastName')?.errors?.['required'] && feedbackForm.get('lastname')?.touched"
+                          class="alert alert-danger">
+                          Last name required
+                          </div>
+                       </div>
+                      <div class="form-group" style="padding-bottom: 25px;">
+                        <label for="phoneno">Phone Number</label>
+                        <br>
+                        <input type="number" class="form-control" id="phoneno" formControlName="phoneno" 
+                        placeholder="(000) 000-0000">
+                        <div *ngIf="feedbackForm.get('phoneno')?.errors?.['required'] && feedbackForm.get('phoneno')?.touched"
+                  class="alert alert-danger"
+                  >
+                  Phone number required
+                  </div>
+                      </div>
+                      <div class="form-group" style="padding-bottom: 25px;">
+                        <br>
+                        <label for="email">Email</label>
+                        <br>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                        <div *ngIf="feedbackForm.get('email')?.errors?.['required'] && feedbackForm.get('email')?.touched"
+                  class="alert alert-danger"
+                  >
+                  Email required
+                  </div>
+                      </div>
+                    
+                      <br>
+                      <div formGroupName="rating">
+                        <label >Please rate this house</label>
+                        <br>
+                        <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                 <td style="padding: 30px;"></td>
+                                 <td style="padding: 30px;" *ngFor="let val of values" >{{val}}</td>
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                  <tr>
+                                    <td>Exterior</td>
+                                    <td *ngFor="let val of values">
+                                      <input type="radio" [value]="val" formControlName="Exterior">
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>Interior</td>
+                                    <td *ngFor="let val of values">
+                                      <input type="radio" [value]="val" formControlName="Interior">
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>Location</td>
+                                    <td *ngFor="let val of values">
+                                      <input type="radio" [value]="val" formControlName="Location">
+                                    </td>
+                                   </tr>
+                                   <tr>
+                                    <td>Amenities</td>
+                                    <td *ngFor="let val of values">
+                                      <input type="radio" [value]="val" formControlName="Amenities">
+                                    </td>
+                                  </tr>
+                                    <tr>
+                                    <td>Price</td>
+                                    <td *ngFor="let val of values">
+                                      <input type="radio" [value]="val" formControlName="Price">
+                                    </td>
+                                  </tr>
+                                 </tbody>
+                                 </table>
+                        </div>
+                      </div>
+                                 
+
+                                  <!-- <td>
+                                    <input type="radio" name="Exterior" id="Exterior" value="poor" formControlName=" Exterior"/>
+                                  </td>
+                                  <td>
+                                    <input type="radio" name="Exterior" id="Exterior" value="fair"  formControlName="Exterior"/>
+                                  </td>
+                                  <td>
+                                    <input type="radio" name="Exterior" id="Exterior" value="Good"  formControlName="Exterior"/>
+                                  </td>
+                                  <td>
+                                    <input type="radio" name="Exterior" id="Exterior" value="Excellent"  formControlName="Exterior" />
+                                  </td>
+
+                                </tr>
+
+                              
+                                <tr>
+                                    <td>Interior</td>
+                                    <td>
+                                    <input type="radio" name="Interior" id="radio5" formControlName="Interior"/>
+                                    </td>
+                                    <td>
+                                    <input type="radio" name="Interior" id="radio6" formControlName="Interior"/>
+                                    </td>
+                                    <td>
+                                    <input type="radio" name="Interior" id="radio7" formControlName="Interior">
+                                    </td>
+                                    <td>
+                                    <input type="radio" name="Interior" id="radio8" formControlName="Interior" />
+                                    </td>
+
+                              </tr>
+                              <tr>
+                                <td>Location</td>
+                                <td>
+                                <input type="radio" name="Location" id="radio9" formControlName="Location"/>
+                                </td>
+                                <td>
+                                <input type="radio" name="Location" id="radio10" formControlName="Location"/>
+                                </td>
+                                <td>
+                                <input type="radio" name="Location" id="radio11" formControlName="Location"/>
+                                </td>
+                                <td>
+                                <input type="radio" name="Location" id="radio12" formControlName="Location"/>
+                                </td>
+
+                            </tr> -->
+                            <!-- <tr>
+                                <td>Amenities</td>
+                                <td>
+                                <input type="radio" name="radiossss" id="radio13" formControlName="radiobut4" />
+                                </td>
+                                <td>
+                                <input type="radio" name="radiossss" id="radio14" formControlName="radiobut4"/>
+                                </td>
+                                <td>
+                                <input type="radio" name="radiossss" id="radio15" formControlName="radiobut4"/>
+                                </td>
+                                <td>
+                                <input type="radio" name="radiossss" id="radio16" formControlName="radiobut4"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td>
+                                <input type="radio" name="radiosssss" id="radio9" formControlName="radiobut5"/>
+                                </td>
+                                <td>
+                                <input type="radio" name="radiosssss" id="radio10" formControlName="radiobut5"/>
+                                </td>
+                                <td>
+                                <input type="radio" name="radiosssss" id="radio11" formControlName="radiobut5"/>
+                                </td>
+                                <td>
+                                <input type="radio" name="radiosssss" id="radio12" formControlName="radiobut5"/>
+                                </td>
+
+                            </tr> -->
+
+                              
+                     <div>
+                        <label for="ques1">what do u like the most about this house?</label>
+                        <br>
+                        <textarea name="ques1" id="ques1" cols="50" rows="5" placeholder="Type here" formControlName="ques1"></textarea>
+                     </div>
+                     <div>
+                        <label for="ques2">what do u like the least about this house?</label>
+                        <br>
+                        <textarea name="ques2" id="ques2" cols="50" rows="5" placeholder="Type here" formControlName="ques2"></textarea>
+                     </div>
+                     <div class="table-responsive">
+                      <table class="table table-hover">
+                          <thead>
+                              <tr>
+                               <td style="padding: 30px;"></td>
+                               <td style="padding: 30px;"  ></td>
+                               </tr>
+                               </thead>
+                               
+                              
+                                <tr>
+
+                                  <td>firstName</td>
+                                  <td>lastName</td>
+                                  <td>contact</td>
+                                  <td>email</td>
+                                  <td colspan="4" >rating</td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td>poor</td>
+                                  <td>fair</td>
+                                  <td>good</td>
+                                  <td>Excellent</td>
+                                </tr>
+                                <tbody *ngFor="let entry of entries">
+                                  <tr>
+                                    <td>
+                                      {{entry.firstName}}
+                                    </td>
+                                    <td>
+                                      {{entry.lastName}}
+                                    </td>
+                                    <td>
+                                      {{entry.phoneno}}
+                                    </td>
+                                    <td>
+                                      {{entry.email}}
+                                    </td>
+                                    <td>
+                                      {{entry.rating.Exterior}}
+                                    </td>
+                                    <td>
+                                      {{entry.rating.Interior}}
+                                    </td>
+                                    <td>
+                                      {{entry.rating.Location}}
+                                    </td>
+                                    <td>
+                                      {{entry.rating.Amenities}}
+                                    </td>
+                                    <td>
+                                      {{entry.rating.Price}}
+                                    </td>
+                                  </tr>
+                                </tbody>
+                                
+
+                                
+                              
+                               </table>
+                      </div>
+                    
+                     <button type="submit">submit</button>
+                </form>
+
+
+
+
+
+
+
+                
+           
+                
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+    </section>
+</body>
+</html>
+   
+    
+
+
+
+
